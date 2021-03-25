@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { MessageBox, Message, Notification } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -52,6 +52,12 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
+      // Notification({
+      //   title: '失败',
+      //   message: res.msg,
+      //   type: 'error',
+      //   duration: 2000
+      // })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -74,7 +80,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      message: '服务器内部错误,请稍后',
       type: 'error',
       duration: 5 * 1000
     })

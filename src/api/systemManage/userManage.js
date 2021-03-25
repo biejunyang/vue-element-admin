@@ -3,7 +3,7 @@ import qs from 'qs'
 
 export function fetchList(query) {
   return request({
-    url: '/user',
+    url: `/user/${query.current}/${query.size}`,
     method: 'get',
     params: query,
     baseURL: '/roleApi'
@@ -28,15 +28,15 @@ export function updateUser(data) {
   })
 }
 
-export function deleteUser(userId) {
+export function deleteUser(params) {
   return request({
-    url: `/user/{userId}`,
+    url: '/user',
     method: 'delete',
-    // params: params,
+    params: params,
     baseURL: '/roleApi',
-    // paramsSerializer: params => {
-    //   return qs.stringify(params, { indices: false })
-    // }
+    paramsSerializer: params => {
+      return qs.stringify(params, { indices: false })
+    }
   })
 }
 
@@ -54,6 +54,15 @@ export function fetchRoles(query) {
     url: '/user/roles',
     method: 'get',
     params: query,
+    baseURL: '/roleApi'
+  })
+}
+
+export function grantRoles(data) {
+  return request({
+    url: '/user/grantRole',
+    method: 'post',
+    data,
     baseURL: '/roleApi'
   })
 }
