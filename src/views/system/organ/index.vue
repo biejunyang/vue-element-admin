@@ -35,9 +35,9 @@
           :data="list"
           border
           fit
-          highlight-current-row
+          highlight-current-row @selection-change="handleSelectionChange"
           style="width: 100%;"
-          @selection-change="handleSelectionChange"
+          
         >
           <el-table-column type="selection" width="55" />
           <el-table-column label="机构名称" prop="name" align="center" width="180" />
