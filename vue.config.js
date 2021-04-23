@@ -48,13 +48,23 @@ module.exports = {
       //   }
       // }
       
-      // 角色管理代理
+      // 系统管理代理
       '/roleApi': {
         // target: `http://localhost:${port}/mock`,
         target: `http://localhost:8080`,
         changeOrigin: true,
         pathRewrite: {
           '^/roleApi': ''
+        }
+      },
+
+      // 系统管理代理
+      '/authApi': {
+        // target: `http://localhost:${port}/mock`,
+        target: `http://localhost:8081`,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/authApi': ''
         }
       }
     },
