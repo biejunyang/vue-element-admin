@@ -58,10 +58,10 @@ module.exports = {
         }
       },
 
-      // 系统管理代理
+      // 认证管理
       '/authApi': {
         // target: `http://localhost:${port}/mock`,
-        target: `http://localhost:8081`,
+        target: `http://localhost:9001`,
         changeOrigin: true,
         pathRewrite: {
           '^/authApi': ''
