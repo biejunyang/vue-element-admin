@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { MessageBox, Message, Notification } from 'element-ui'
+// import { MessageBox, Message, Notification } from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -19,7 +20,8 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      // config.headers['X-Token'] = getToken()
+      config.headers['Authorization'] = 'Bearer ' + getToken()
     }
     return config
   },
@@ -43,9 +45,15 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    console.info("success:", response)
-    const res = response.data
+    console.info('success:', response)
 
+    // 特殊请求处理，如登录请求
+    const url = response.config.url
+    if (url.split('/').pop() === 'token' || url.split('/').pop() === 'userInfo') {
+      return response
+    }
+    const res = response.data
+    console.info('xxxxxxxxx')
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000 && res.status !== 1) {
       Message({
