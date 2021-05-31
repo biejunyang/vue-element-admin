@@ -40,6 +40,7 @@ service.interceptors.response.use(
   */
 
   /**
+   * 请求响应成功统一处理
    * Determine the request status by custom code
    * Here is just an example
    * You can also judge the status by HTTP Status Code
@@ -47,20 +48,18 @@ service.interceptors.response.use(
   response => {
     console.info('success:', response)
 
-    // 特殊请求处理，如登录请求
-    const url = response.config.url
-    if (url.split('/').pop() === 'token' || url.split('/').pop() === 'userInfo') {
-      return response
-    }
     const res = response.data
-    console.info('xxxxxxxxx')
     // if the custom code is not 20000, it is judged as an error.
+    // 统一业务错误码处理
     if (res.code !== 20000 && res.status !== 1) {
-      Message({
-        message: res.msg || '服务器内部错误,请稍后',
-        type: 'error',
-        duration: 5 * 1000
-      })
+      if (res.msg) {
+        Message({
+          message: res.msg,
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
+
       // Notification({
       //   title: '失败',
       //   message: res.msg,
@@ -83,16 +82,26 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.msg || '服务器内部错误,请稍后'))
     } else {
+      // 请求成功统一处理响应数据
+      // 特殊请求处理，如登录请求
+      // const url = response.config.url
+      // if (url.split('/').pop() === 'token' || url.split('/').pop() === 'userInfo') {
+      //   return response
+      // }
+
       return res
     }
   },
+  /**
+   * 请求响应失败统一处理
+   */
   error => {
     console.log('err' + error) // for debug
-    Message({
-      message: '服务器内部错误,请稍后',
-      type: 'error',
-      duration: 5 * 1000
-    })
+    // Message({
+    //   message: '服务器内部错误,请稍后',
+    //   type: 'error',
+    //   duration: 5 * 1000
+    // })
     return Promise.reject(error)
   }
 )
