@@ -7,7 +7,9 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  authorities: [],
+  adminType: false
 }
 
 const mutations = {
@@ -25,6 +27,12 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_AUTHORITIES: (state, authorities) => {
+    state.authorities = authorities
+  },
+  SET_ADMINTYPE: (state, adminType) => {
+    state.adminType = adminType
   }
 }
 
@@ -47,12 +55,14 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
+      getInfo(state.token).then(res => {
         // const { data } = response
         // const data = response
-        console.info("real info: ", response)
+        console.info('real info: ', res)
         const data = {
           roles: ['admin'],
+          adminType: 0,
+          authorities: res.data.authorities,
           introduction: 'I am a super administrator',
           avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
           name: 'Super Admin'
@@ -61,7 +71,7 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar, introduction } = data
+        const { roles, authorities, name, avatar, introduction, adminType } = data
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -69,9 +79,11 @@ const actions = {
         }
 
         commit('SET_ROLES', roles)
+        commit('SET_AUTHORITIES', authorities)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
+        commit('SET_ADMINTYPE', adminType)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -103,7 +115,7 @@ const actions = {
   resetToken({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
-      commit('SET_ROLES', [])
+      commit('SET_NAME', '')
       removeToken()
       resolve()
     })

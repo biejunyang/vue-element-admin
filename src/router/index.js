@@ -401,6 +401,9 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+// 最后一个路由是404
+export const last404Route = { path: '*', redirect: '/404', hidden: true }
+
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

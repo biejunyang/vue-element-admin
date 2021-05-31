@@ -169,8 +169,8 @@ export default {
               // 登录成功
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
-            })
-            .catch(() => {
+            }).catch(error => {
+              console.info(error)
               this.loading = false
             })
         } else {
