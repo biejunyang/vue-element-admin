@@ -63,12 +63,12 @@ const actions = {
         // auths = auths.concat(['Permission', 'DirectivePermission', 'admin', 'editor'])
 
         const data = {
-          roles: ['admin'],
-          adminType: 1,
+          name: res.data.username,
+          roles: res.data.username,
+          adminType: res.data.adminType,
           authorities: auths,
           introduction: 'I am a super administrator',
-          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-          name: 'Super Admin'
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
         }
         if (!data) {
           reject('Verification failed, please Login again.')
