@@ -219,7 +219,7 @@ export default {
         ],
         organ: [{ required: true, message: '请选择所属机构', trigger: 'change' }]
       },
-      //角色 授权窗体
+      // 角色 授权窗体
       roleDialogGrantVisible: false,
       roleListLoading: false,
       roles: [],
@@ -307,7 +307,7 @@ export default {
         return
       }
       this.formData = Object.assign({}, this.multipleSelection[0]) // copy obj
-      if(this.formData.sex !== undefined){
+      if (this.formData.sex !== undefined) {
         this.formData.sex = String(this.formData.sex)
       }
       this.formData.organ = [this.formData.organId]
@@ -344,7 +344,7 @@ export default {
         })
         return
       }
-      let idList = this.multipleSelection.map(t => t.id)
+      const idList = this.multipleSelection.map(t => t.id)
       console.info(idList)
       deleteUser({ idList }).then(() => {
         this.getList()
@@ -381,26 +381,26 @@ export default {
       this.roleListLoading = true
 
       fetchRoles({ id: '1374984999032557569' }).then(res => {
-        let roles = res.data
-        let roleIds = roles.map(t => t.id)
-        
-        fetchRoles({ id:  this.multipleSelection[0].id }).then(r => {
-          let checkRows=[]
-          r.data.forEach( t => {
-            if(roleIds.indexOf(t.id) < 0){
+        const roles = res.data
+        const roleIds = roles.map(t => t.id)
+
+        fetchRoles({ id: this.multipleSelection[0].id }).then(r => {
+          const checkRows = []
+          r.data.forEach(t => {
+            if (roleIds.indexOf(t.id) < 0) {
               roles.push(t)
               checkRows.push(t)
               t.selectable = false
-            }else{
+            } else {
               checkRows.push(roles[roleIds.indexOf(t.id)])
             }
-          }) 
+          })
           this.roleListLoading = false
           this.roles = roles
-        
+
           this.$nextTick(() => {
             checkRows.forEach(row => {
-              this.$refs.roleTable.toggleRowSelection(row, true)  
+              this.$refs.roleTable.toggleRowSelection(row, true)
             })
           })
         })
@@ -461,9 +461,8 @@ export default {
     rolehandleSelectionChange(val) {
       this.selectRoles = val
     },
-    roleSelectable(row, index){
-      if(row.selectable==null)
-        return true
+    roleSelectable(row, index) {
+      if (row.selectable == null) { return true }
       return false
     }
   }

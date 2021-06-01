@@ -37,7 +37,7 @@
           fit
           highlight-current-row @selection-change="handleSelectionChange"
           style="width: 100%;"
-          
+
         >
           <el-table-column type="selection" width="55" />
           <el-table-column label="机构名称" prop="name" align="center" width="180" />
