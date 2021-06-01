@@ -57,6 +57,7 @@ const actions = {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, authorities)
         accessedRoutes.push(last404Route)
       }
+      console.info('accessedRoutes:', accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

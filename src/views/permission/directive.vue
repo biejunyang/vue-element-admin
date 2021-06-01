@@ -1,5 +1,47 @@
 <template>
   <div class="app-container">
+
+    <div>
+      <span v-permission="'admin'" class="permission-alert">
+        Only
+        <el-tag class="permission-tag" size="small">admin</el-tag> can see this
+      </span>
+      <el-tag v-permission="'admin'" class="permission-sourceCode" type="info">
+        v-permission="'admin'"
+      </el-tag>
+    </div>
+
+    <div>
+      <span v-permission="'editor'" class="permission-alert">
+        Only
+        <el-tag class="permission-tag" size="small">editor</el-tag> can see this
+      </span>
+      <el-tag v-permission="'editor'" class="permission-sourceCode" type="info">
+        v-permission="'editor'"
+      </el-tag>
+    </div>
+
+<div>
+      <span v-if="checkPermission('admin')" class="permission-alert">
+        Only
+        <el-tag class="permission-tag" size="small">admin</el-tag> can see this
+      </span>
+      <el-tag v-if="checkPermission('admin')" class="permission-sourceCode" type="info">
+        v-if="checkPermission('admin')"
+      </el-tag>
+    </div>
+
+   <div>
+      <span v-if="checkPermission('editor')" class="permission-alert">
+        Only
+        <el-tag class="permission-tag" size="small">editor</el-tag> can see this
+      </span>
+      <el-tag  v-if="checkPermission('editor')" class="permission-sourceCode" type="info">
+        v-if="checkPermission('editor')"
+      </el-tag>
+    </div>
+
+    <h3>以下是原始权限控制方式</h3>
     <switch-roles @change="handleRolesChange" />
     <div :key="key" style="margin-top:30px;">
       <div>
