@@ -64,7 +64,7 @@ const actions = {
 
         const data = {
           name: res.data.username,
-          roles: res.data.username,
+          roles: res.data.roles,
           adminType: res.data.adminType,
           authorities: auths,
           introduction: 'I am a super administrator',

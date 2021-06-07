@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button v-waves class="filter-item" type="primary" size="mini" icon="el-icon-circle-plus" @click="handleCreate">新增</el-button>
-      <el-button v-waves class="filter-item" type="success" size="mini" icon="el-icon-edit" @click="handleUpdate">修改</el-button>
-      <el-button v-waves class="filter-item" type="danger" size="mini" icon="el-icon-delete" @click="handleDelete">删除</el-button>
+      <el-button v-permission="'privilege_add'" v-waves class="filter-item" type="primary" size="mini" icon="el-icon-circle-plus" @click="handleCreate">新增</el-button>
+      <el-button v-permission="'privilege_edit'" v-waves class="filter-item" type="success" size="mini" icon="el-icon-edit" @click="handleUpdate">修改</el-button>
+      <el-button v-permission="'privilege_delete'" v-waves class="filter-item" type="danger" size="mini" icon="el-icon-delete" @click="handleDelete">删除</el-button>
       <el-button v-waves class="filter-item" type="info" size="mini" icon="el-icon-refresh" @click="handleFilter">刷新</el-button>
     </div>
     <el-table
@@ -107,7 +107,7 @@ export default {
   directives: { waves },
   data() {
     return {
-      list: null,
+      list: [],
       listLoading: false,
       selectedRow: undefined,
 
