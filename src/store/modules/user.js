@@ -58,10 +58,10 @@ const actions = {
       getInfo(state.token).then(res => {
         // const { data } = response
         // const data = response
-        console.info('real info: ', res)
+        // console.info('real info: ', res)
         const auths = res.data.authorities
         // auths = auths.concat(['Permission', 'DirectivePermission', 'admin', 'editor'])
-
+      
         const data = {
           name: res.data.username,
           roles: res.data.roles,
@@ -100,6 +100,11 @@ const actions = {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
+        commit('SET_AUTHORITIES', [])
+        commit('SET_NAME', '')
+        commit('SET_AVATAR', '')
+        commit('SET_INTRODUCTION', '')
+        commit('SET_ADMINTYPE', '')
         removeToken()
         resetRouter()
 

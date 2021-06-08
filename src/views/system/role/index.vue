@@ -136,7 +136,7 @@ export default {
       },
       // 授权窗体
       dialogGrantVisible: false,
-      privileges: undefined,
+      privileges: [],
       expendkeys: []
 
     }
@@ -270,7 +270,7 @@ export default {
       this.dialogGrantVisible = true
       this.privileges = []
       this.expendkeys = []
-      fetchPrivileges({ userId: 1 }).then(res => {
+      fetchPrivileges({ username: this.$store.getters.name }).then(res => {
         this.privileges = res.data
         fetchRolePrivilegeIds({ roleId: row.id }).then(r => {
           this.$refs.privilegeTree.setCheckedKeys(r.data)

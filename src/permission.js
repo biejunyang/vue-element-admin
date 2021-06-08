@@ -30,6 +30,7 @@ router.beforeEach(async(to, from, next) => {
       // 判断是否已经获取过用户信息了
       const hasName = store.getters.name && store.getters.name.length > 0
       if (hasName) {
+        console.info(store.getters.name)
         next()
       } else {
         try {

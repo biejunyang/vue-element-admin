@@ -18,7 +18,7 @@
       <el-button v-permission="'user_add'" v-waves class="filter-item" type="primary" size="mini" icon="el-icon-circle-plus" @click="handleCreate">新增</el-button>
       <el-button v-permission="'user_edit'" v-waves class="filter-item" type="success" size="mini" icon="el-icon-edit" @click="handleUpdate">修改</el-button>
       <el-button v-permission="'user_delete'" v-waves class="filter-item" type="danger" size="mini" icon="el-icon-delete" @click="handleDelete">删除</el-button>
-      <el-button v-permission="'user_garnt_role'" v-waves class="filter-item" type="primary" size="mini" icon="el-icon-edit" @click="handleGrantRole">授权橘色</el-button>
+      <el-button v-permission="'user_garnt_role'" v-waves class="filter-item" type="primary" size="mini" icon="el-icon-edit" @click="handleGrantRole">授权角色</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -380,11 +380,11 @@ export default {
       this.selectRoles = []
       this.roleListLoading = true
 
-      fetchRoles({ id: '1374984999032557569' }).then(res => {
+      fetchRoles({ username: this.$store.getters.name }).then(res => {
         const roles = res.data
         const roleIds = roles.map(t => t.id)
 
-        fetchRoles({ id: this.multipleSelection[0].id }).then(r => {
+        fetchRoles({ username: this.multipleSelection[0].username }).then(r => {
           const checkRows = []
           r.data.forEach(t => {
             if (roleIds.indexOf(t.id) < 0) {

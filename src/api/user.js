@@ -9,6 +9,7 @@ export function login(data) {
     username: data.username,
     password: data.password
   }
+  console.info('xxxxxx', postData)
   return request({
     // url: '/vue-element-admin/user/login',
     // url: '/oauth/token?grant_type=password&username=admin&password=123456&client_id=client&client_secret=client',

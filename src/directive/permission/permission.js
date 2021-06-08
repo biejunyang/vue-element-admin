@@ -3,7 +3,7 @@ import store from '@/store'
 export default {
   inserted(el, binding, vnode) {
     const { value } = binding
-
+    console.info('xxxxxxx', value)
     if (value && value.length > 0) {
       const adminType = store.getters.adminType
       let hasPermission = false

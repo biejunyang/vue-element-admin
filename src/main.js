@@ -19,7 +19,7 @@ import './permission' // permission control
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
-import permission from '@/directive/permission/index.js' // 权限判断指令
+import permission from '@/directive/permission/permission' // 权限判断指令
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -42,7 +42,8 @@ Vue.use(Element, {
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
-Vue.directive('permission', { permission })
+
+Vue.directive('permission', permission)
 
 Vue.config.productionTip = false
 
