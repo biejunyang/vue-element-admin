@@ -61,7 +61,7 @@ const actions = {
         // console.info('real info: ', res)
         const auths = res.data.authorities
         // auths = auths.concat(['Permission', 'DirectivePermission', 'admin', 'editor'])
-      
+
         const data = {
           name: res.data.username,
           roles: res.data.roles,

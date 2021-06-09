@@ -40,15 +40,6 @@ export function deleteUser(params) {
   })
 }
 
-export function fetchPrivileges(query) {
-  return request({
-    url: '/user/privileges',
-    method: 'get',
-    params: query,
-    baseURL: '/roleApi'
-  })
-}
-
 export function fetchRoles(query) {
   return request({
     url: '/user/roles',

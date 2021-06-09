@@ -92,8 +92,7 @@
 </template>
 
 <script>
-import { fetchList, createRole, updateRole, deleteRole, fetchRolePrivilegeIds, grantPrivileges } from '@/api/systemManage/roleManage'
-import { fetchPrivileges } from '@/api/systemManage/userManage'
+import { fetchList, createRole, updateRole, deleteRole, fetchEditPrivileges, grantPrivileges } from '@/api/systemManage/roleManage'
 import waves from '@/directive/waves' // Waves directive
 // import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
@@ -270,14 +269,22 @@ export default {
       this.dialogGrantVisible = true
       this.privileges = []
       this.expendkeys = []
-      fetchPrivileges({ username: this.$store.getters.name }).then(res => {
-        this.privileges = res.data
-        fetchRolePrivilegeIds({ roleId: row.id }).then(r => {
-          this.$refs.privilegeTree.setCheckedKeys(r.data)
-          // 选中的默认展开
-          this.expendkeys = r.data
-        })
+      fetchEditPrivileges({ roleId: row.id }).then(res => {
+        this.privileges = res.data.allPriveleges
+        // 获取应该选中的节点
+        const checkNodes = res.data.checkedIds
+        this.$refs.privilegeTree.setCheckedKeys(checkNodes)
+        // 选中的默认展开
+        this.expendkeys = checkNodes
       })
+      // fetchPrivileges({ username: this.$store.getters.name }).then(res => {
+      //   this.privileges = res.data
+      //   fetchRolePrivilegeIds({ roleId: row.id }).then(r => {
+      //     this.$refs.privilegeTree.setCheckedKeys(r.data)
+      //     // 选中的默认展开
+      //     this.expendkeys = r.data
+      //   })
+      // })
     },
     grant() {
       const row = this.list[this.selectRowIndex]

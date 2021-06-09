@@ -40,9 +40,9 @@ export function deleteRole(params) {
   })
 }
 
-export function fetchRolePrivilegeIds(query) {
+export function fetchEditPrivileges(query) {
   return request({
-    url: '/role/privileges',
+    url: '/role/editPrivileges',
     method: 'get',
     params: query,
     baseURL: '/roleApi'
