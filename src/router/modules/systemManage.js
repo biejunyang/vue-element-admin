@@ -36,6 +36,12 @@ const systemManageRouter = {
       component: () => import('@/views/system/user/index'),
       name: 'userManage',
       meta: { title: '用户管理' }
+    },
+    {
+      path: 'sysConfig',
+      component: () => import('@/views/system/config/index'),
+      name: 'sysConfigManage',
+      meta: { title: '参数配置' }
     }
   ]
 }

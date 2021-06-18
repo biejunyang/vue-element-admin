@@ -47,7 +47,7 @@ module.exports = {
       //     ['^' + process.env.VUE_APP_BASE_API]: ''
       //   }
       // }
-      
+
       // 系统管理代理
       '/roleApi': {
         // target: `http://localhost:${port}/mock`,
@@ -61,7 +61,7 @@ module.exports = {
       // 认证管理
       '/authApi': {
         // target: `http://localhost:${port}/mock`,
-        target: `http://localhost:9001`,
+        target: `http://10.225.12.98:9001`,
         changeOrigin: true,
         pathRewrite: {
           '^/authApi': ''
