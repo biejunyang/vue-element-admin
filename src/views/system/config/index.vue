@@ -1,17 +1,23 @@
 <template>
   <div class="app-container">
       <div class="filter-container">
-        <el-form :inline="true" :model="listQuery" label-position="right" label-width="160px">
-          <el-form-item label="参数名称：">
-            <el-input v-model="listQuery.name" placeholder="请输入名称"  @keyup.enter.native="handleSearch" />
-          </el-form-item>
-          <el-form-item label="参数编号">
-            <el-input v-model="listQuery.code" placeholder="请输入名称"  @keyup.enter.native="handleSearch" />
-          </el-form-item>
-          <el-form-item label=" ">
-            <el-button v-waves type="primary" icon="el-icon-search" @click="handleSearch">查询</el-button>
-            <el-button v-waves type="info" icon="el-icon-refresh" @click="handleResetSearch">重置</el-button>
-          </el-form-item>
+        <el-form :inline="true" :model="listQuery" label-position="right" label-width="100px">
+          <el-row>
+            <el-col :span="9">
+              <el-form-item label="参数名称：">
+                <el-input v-model="listQuery.name" placeholder="请输入名称"  @keyup.enter.native="handleSearch" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="9">
+              <el-form-item label="参数编号">
+                <el-input v-model="listQuery.code" placeholder="请输入名称"  @keyup.enter.native="handleSearch" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+                <el-button v-waves type="primary" icon="el-icon-search" @click="handleSearch">查询</el-button>
+                <el-button v-waves type="info" icon="el-icon-refresh" @click="handleResetSearch">重置</el-button>
+            </el-col>
+          </el-row>
         </el-form>
       </div>
 
@@ -45,7 +51,7 @@
 
       <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size" :page-sizes="[20,30,40]" style="float:right" @pagination="getList" />
 
-      <configDetail :type="optType"></configDetail>
+      <configDetail :type.sync="detailType" :formData.sync="detailData" @success="getList"></configDetail>
   </div>
 </template>
 
@@ -70,28 +76,9 @@ export default {
       list: [],
       total: 0,
       selection: [],
-      optType: ''
-      // // 新增修改窗体
-      // dialogFormVisible: false,
-      // dialogStatus: '',
-      // textMap: {
-      //   update: '修改',
-      //   create: '新增'
-      // },
-      // formData: {
-      //   id: undefined,
-      //   name: undefined,
-      //   code: undefined,
-      //   remark: undefined
-      // },
-      // rules: {
-      //   name: [{ required: true, message: '角色名称必填!', trigger: 'change' }],
-      //   code: [{ required: true, message: '角色编码必填', trigger: 'change' }]
-      // },
-      // // 授权窗体
-      // dialogGrantVisible: false,
-      // privileges: [],
-      // expendkeys: []
+
+      detailType: '',
+      detailData: undefined
 
     }
   },
@@ -117,13 +104,16 @@ export default {
       this.getList()
     },
     handleCreate() {
-      this.optType = 'create'
+      this.detailType = 'create'
+      console.info(this.detailData)
     },
     handleUpdate() {
-      this.optType = 'update'
+      this.detailType = 'update'
+      this.detailData = Object.assign({}, this.selection[0])
     },
     handleView() {
-      this.optType = 'view'
+      this.detailType = 'view'
+      this.detailData = Object.assign({}, this.selection[0])
     },
     handleDelete() {
 
