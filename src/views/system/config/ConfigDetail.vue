@@ -104,6 +104,7 @@ export default {
             updateConfig(this.formData).then(() => {
               this.dialogVisible = false
               // this.getList()
+              this.$emit('success')
               this.$notify({
                 title: '成功',
                 message: '修改成功',
